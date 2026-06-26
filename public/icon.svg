@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+    <title id="title">MyWatches MW icon</title>
+    <rect width="512" height="512" rx="112" fill="#2C2926"/>
+    <circle cx="256" cy="256" r="178" fill="none" stroke="#F9F8F6" stroke-width="18" opacity=".22"/>
+    <text x="256" y="304"
+          fill="#F9F8F6"
+          font-family="Georgia, 'Times New Roman', serif"
+          font-size="168"
+          font-weight="700"
+          font-style="italic"
+          text-anchor="middle"
+          letter-spacing="-8">MW</text>
+</svg>

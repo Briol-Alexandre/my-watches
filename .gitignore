@@ -1,0 +1,40 @@
+/.phpunit.cache
+/node_modules
+/public/build
+/public/fonts-manifest.dev.json
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+
+# Environment files
+.env
+.env.backup
+.env.production
+
+# Local databases
+/database/*.sqlite
+/database/*.sqlite-*
+
+# Logs and caches
+*.log
+.eslintcache
+.phpunit.result.cache
+.phpactor.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local development tools
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/auth.json
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed

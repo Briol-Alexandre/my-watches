@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+    /* FONTS */
+    --font-sans: Inter, sans-serif;
+    --font-playfair: Playfair Display, serif;
+
+    /* COLORS */
+    --color-bg: #F9F8F6;
+    --color-main: #2C2926;
+    --color-secondary: #4D4635;
+}
+
+@layer base {
+    body {
+        @apply relative min-h-screen bg-bg p-4 pb-32 sm:p-6 sm:pb-32 lg:p-10 lg:pb-32;
+    }
+
+    .big-title {
+        @apply break-words text-3xl font-playfair text-main font-black italic sm:text-4xl;
+    }
+
+    .title{
+        @apply break-words text-2xl font-playfair text-main font-black sm:text-3xl;
+    }
+
+    .card-container {
+        @apply grid grid-cols-1 gap-4 sm:grid-cols-2;
+
+        .card {
+            @apply min-w-0 bg-white px-5 py-5 flex-1 border-secondary/20 border rounded-lg sm:px-8 lg:px-10;
+            box-shadow: 0 1px 2px color-mix(in oklab, var(--color-main) 8%, transparent),
+            0 10px 24px color-mix(in oklab, var(--color-main) 6%, transparent);
+
+            .card-title {
+                @apply uppercase font-bold text-xs text-secondary/50;
+            }
+
+            .card-value {
+                @apply break-words font-playfair text-2xl font-black italic text-main sm:text-3xl;
+
+                span {
+                    @apply text-xl font-normal text-secondary;
+                }
+            }
+        }
+    }
+    .btn {
+        @apply inline-flex min-h-10 w-full items-center justify-center rounded-lg border border-main bg-main px-4 py-2 text-center text-sm text-bg transition-all duration-300 sm:w-fit;
+        &:hover{
+            @apply bg-transparent text-main transition-all duration-300;
+        }
+    }
+    .btn-secondary {
+        @apply border-secondary/25 bg-white text-main;
+        &:hover {
+            @apply border-main bg-main text-bg;
+        }
+    }
+    .btn-danger {
+        @apply border-red-900 bg-red-900;
+        &:hover {
+            @apply bg-transparent text-red-900;
+        }
+    }
+    .field-container {
+        @apply flex flex-col gap-2;
+        label {
+            @apply text-xs font-bold uppercase tracking-wide text-secondary/50;
+        }
+        input,
+        select {
+            @apply w-full rounded-lg border border-secondary/20 bg-bg px-3 py-2.5 text-sm text-main outline-none transition;
+            box-shadow: inset 0 1px 1px color-mix(in oklab, var(--color-main) 4%, transparent);
+        }
+        input::placeholder {
+            @apply text-secondary/35;
+        }
+        input:focus,
+        select:focus {
+            @apply border-main/50 bg-white;
+            box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-main) 10%, transparent);
+        }
+    }
+}
+
+@layer components {
+    .watch-form-card,
+    .watch-preview-card {
+        @apply rounded-lg border border-secondary/20 bg-white;
+        box-shadow: 0 1px 2px color-mix(in oklab, var(--color-main) 8%, transparent),
+        0 10px 24px color-mix(in oklab, var(--color-main) 6%, transparent);
+    }
+
+    .watch-form-card {
+        @apply flex flex-col gap-6 p-5 sm:p-6 lg:p-8;
+    }
+
+    .watch-preview-card {
+        @apply flex h-fit flex-col gap-5 p-5;
+    }
+
+    .watch-preview-card__image {
+        @apply flex aspect-square items-center justify-center overflow-hidden rounded-lg border border-secondary/15 bg-bg text-xs font-bold uppercase tracking-wide text-secondary/40;
+        background:
+            linear-gradient(135deg, color-mix(in oklab, var(--color-main) 8%, transparent), transparent 42%),
+            radial-gradient(circle at 50% 42%, color-mix(in oklab, var(--color-secondary) 16%, transparent), transparent 34%),
+            var(--color-bg);
+    }
+
+    .watch-preview-card__image img {
+        @apply h-full w-full object-cover;
+    }
+
+    .watch-grid {
+        @apply grid gap-4 sm:grid-cols-2 xl:grid-cols-3;
+    }
+
+    .watch-card {
+        @apply flex flex-col gap-5 rounded-lg border border-secondary/20 bg-white p-5 text-main no-underline transition;
+        box-shadow: 0 1px 2px color-mix(in oklab, var(--color-main) 8%, transparent),
+        0 10px 24px color-mix(in oklab, var(--color-main) 6%, transparent);
+    }
+
+    .watch-card:hover {
+        @apply border-main/30;
+        transform: translateY(-2px);
+        box-shadow: 0 1px 2px color-mix(in oklab, var(--color-main) 10%, transparent),
+        0 16px 32px color-mix(in oklab, var(--color-main) 9%, transparent);
+    }
+
+    .watch-card__image {
+        @apply flex aspect-square items-center justify-center overflow-hidden rounded-lg border border-secondary/15 bg-bg text-xs font-bold uppercase tracking-wide text-secondary/40;
+        background:
+            linear-gradient(135deg, color-mix(in oklab, var(--color-main) 8%, transparent), transparent 42%),
+            radial-gradient(circle at 50% 42%, color-mix(in oklab, var(--color-secondary) 16%, transparent), transparent 34%),
+            var(--color-bg);
+    }
+
+    .watch-card__image img {
+        @apply h-full w-full object-cover;
+    }
+
+    .watch-detail-card {
+        @apply rounded-lg border border-secondary/20 bg-white p-5;
+        box-shadow: 0 1px 2px color-mix(in oklab, var(--color-main) 8%, transparent),
+        0 10px 24px color-mix(in oklab, var(--color-main) 6%, transparent);
+    }
+
+    .watch-detail-card__image {
+        @apply flex aspect-[4/3] min-h-52 items-center justify-center overflow-hidden rounded-lg border border-secondary/15 bg-bg text-xs font-bold uppercase tracking-wide text-secondary/40 sm:min-h-80;
+        background:
+            linear-gradient(135deg, color-mix(in oklab, var(--color-main) 8%, transparent), transparent 42%),
+            radial-gradient(circle at 50% 42%, color-mix(in oklab, var(--color-secondary) 16%, transparent), transparent 34%),
+            var(--color-bg);
+    }
+
+    .watch-detail-card__image img {
+        @apply h-full w-full object-cover;
+    }
+
+    .modal-backdrop {
+        @apply fixed inset-0 z-40 flex items-center justify-center bg-main/30 p-5 backdrop-blur-sm;
+    }
+
+    .brand-modal {
+        @apply flex w-full max-w-md flex-col gap-6 rounded-lg border border-secondary/20 bg-white p-5 sm:p-6;
+        box-shadow: 0 1px 2px color-mix(in oklab, var(--color-main) 8%, transparent),
+        0 24px 48px color-mix(in oklab, var(--color-main) 18%, transparent);
+    }
+
+    .page-header {
+        @apply flex min-w-0 flex-col gap-3 sm:flex-row sm:items-end sm:justify-between;
+    }
+
+    .section-heading {
+        @apply flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between;
+    }
+
+    .action-bar {
+        @apply grid w-full gap-2 sm:flex sm:w-auto sm:flex-wrap sm:justify-end;
+    }
+
+    .form-actions {
+        @apply flex flex-col-reverse gap-3 border-t border-secondary/15 pt-5 sm:flex-row sm:items-center sm:justify-between;
+    }
+
+    .dock-menu {
+        @apply fixed bottom-5 left-1/2 z-50 grid -translate-x-1/2 grid-cols-[0fr_auto_0fr] items-center justify-center overflow-hidden border border-main/25 bg-bg/55 px-4 py-3 text-main shadow-lg shadow-main/10 backdrop-blur-xl sm:bottom-8;
+        width: 15rem;
+        max-width: calc(100vw - 2rem);
+        border-radius: 999px;
+        transition: width 420ms cubic-bezier(.22, 1, .36, 1),
+        grid-template-columns 420ms cubic-bezier(.22, 1, .36, 1),
+        padding 420ms cubic-bezier(.22, 1, .36, 1),
+        border-color 260ms ease,
+        background-color 260ms ease,
+        box-shadow 260ms ease;
+    }
+
+    .dock-menu:hover,
+    .dock-menu:focus-within {
+        @apply border-main/45 bg-bg/70 px-5 shadow-xl shadow-main/15;
+        grid-template-columns: 1fr auto 1fr;
+        width: min(42rem, calc(100vw - 2rem));
+    }
+
+    .dock-menu__brand {
+        @apply flex shrink-0 items-center justify-center overflow-hidden text-main no-underline;
+        width: 12.125rem;
+    }
+
+    .dock-menu__logo {
+        @apply block;
+        width: 12.125rem;
+    }
+
+    .dock-menu__logo svg {
+        @apply block h-auto max-w-none;
+        width: 12.125rem;
+    }
+
+    .dock-menu__link {
+        @apply invisible block min-w-0 overflow-hidden whitespace-nowrap rounded-full px-3 py-2 text-center text-sm font-medium text-main/75 no-underline opacity-0 transition;
+        pointer-events: none;
+        transform: translateY(.25rem) scale(.98);
+        transition: opacity 240ms ease 90ms,
+        transform 420ms cubic-bezier(.22, 1, .36, 1),
+        background-color 180ms ease,
+        color 180ms ease,
+        visibility 0ms linear 300ms;
+    }
+
+    .dock-menu__link-group {
+        @apply flex min-w-0 items-center;
+    }
+
+    .dock-menu__link-group--left {
+        @apply justify-end;
+        margin-right: 1rem;
+    }
+
+    .dock-menu__link-group--right {
+        @apply justify-start;
+        margin-left: 1rem;
+    }
+
+    .dock-menu:hover .dock-menu__link,
+    .dock-menu:focus-within .dock-menu__link {
+        @apply visible opacity-100;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+        transition-delay: 120ms, 0ms, 0ms, 0ms, 0ms;
+    }
+
+    .dock-menu__link--left {
+        @apply justify-self-end;
+    }
+
+    .dock-menu__link--right {
+        @apply justify-self-start;
+    }
+
+    .dock-menu__link:hover,
+    .dock-menu__link:focus-visible {
+        @apply bg-main/10 text-main outline-none;
+    }
+
+    @media (max-width: 520px) {
+        .dock-menu:hover,
+        .dock-menu:focus-within {
+            width: calc(100vw - 1.5rem);
+        }
+
+        .dock-menu {
+            width: 12rem;
+        }
+
+        .dock-menu__brand,
+        .dock-menu__logo,
+        .dock-menu__logo svg {
+            width: 9.5rem;
+        }
+
+        .dock-menu__link {
+            @apply px-2 text-xs;
+        }
+
+        .dock-menu__link-group--left {
+            margin-right: .5rem;
+        }
+
+        .dock-menu__link-group--right {
+            margin-left: .5rem;
+        }
+    }
+
+}
